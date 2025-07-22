@@ -2,7 +2,11 @@ require('dotenv').config();
 const connectDB = require('./utils/database');
 const express = require('express');
 const app = express();
-
+const authRouter = require('./routes/auth');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.use(express.json());
+app.use(authRouter);
 connectDB()
   .then(() => {
     app.listen(3000 , () => {
