@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema({
   },
   photoUrl: {
     type: String,
+    default : "https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121231710-stock-illustration-male-default-avatar-profile-gray.jpg",
     validate(value) {
       if (!validator?.isURL(value)) {
         throw new Error("Invalid URL");
@@ -59,6 +60,8 @@ const userSchema = new mongoose.Schema({
       message: "{VALUE} is not a valid gender",
     },
   },
+} , {
+  timestamps: true
 });
 
 userSchema.methods.getJWT = function () {
