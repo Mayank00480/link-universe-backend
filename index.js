@@ -4,9 +4,11 @@ const express = require('express');
 const app = express();
 const authRouter = require('./routes/auth');
 const cookieParser = require('cookie-parser');
+const profileRouter = require('./routes/profile');
 app.use(cookieParser());
 app.use(express.json());
 app.use(authRouter);
+app.use(profileRouter);
 connectDB()
   .then(() => {
     app.listen(3000 , () => {

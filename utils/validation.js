@@ -15,4 +15,12 @@ const validateLogin = (req) => {
    } 
 }
 
-module.exports = {validateSignUp, validateLogin};
+const validateProfileUpdate = (req) => {
+   const allowedFields = ['firstName', 'lastName', 'age', 'gender', 'photoUrl', 'skills', 'about'];
+   const isValidFields = Object.keys(req.body).every(key => allowedFields.includes(key));
+   if(!isValidFields){
+         throw new Error('Invalid fields in request body');
+   }
+}
+
+module.exports = {validateSignUp, validateLogin , validateProfileUpdate};
