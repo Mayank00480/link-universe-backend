@@ -25,7 +25,9 @@ authRouter.post("/login", async (req, res) => {
     validateSignUp(req);
     const { emailId, password } = req.body;
     const user = await User.findOne({ emailId: emailId });
-    
+    if(!user){
+      throw new Error("User not found");
+    }
     const isPasswordValid = await user.comparePassword(password);
     if (isPasswordValid) {
       var token = user.getJWT();
