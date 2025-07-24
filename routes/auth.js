@@ -22,10 +22,10 @@ authRouter.post("/signup", async (req, res) => {
 
 authRouter.post("/login", async (req, res) => {
   try {
-    validateLogin(req);
+    validateSignUp(req);
     const { emailId, password } = req.body;
     const user = await User.findOne({ emailId: emailId });
-
+    
     const isPasswordValid = await user.comparePassword(password);
     if (isPasswordValid) {
       var token = user.getJWT();
