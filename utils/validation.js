@@ -7,6 +7,10 @@ const validateSignUp = (req) => {
   if (!validator?.isEmail(req.body.emailId)) {
     throw new Error("Invalid email format");
   }
+  validateLogin(req)
+};
+
+const validateLogin = (req)=> {
   const allowedFields = ["emailId", "password"];
   const isValidFields = Object.keys(req.body).every((key) =>
     allowedFields.includes(key)
@@ -14,7 +18,7 @@ const validateSignUp = (req) => {
   if (!isValidFields) {
     throw new Error("Invalid fields in request body");
   }
-};
+}
 
 const validateProfileUpdate = (req) => {
   const allowedFields = [
@@ -34,4 +38,4 @@ const validateProfileUpdate = (req) => {
   }
 };
 
-module.exports = { validateSignUp, validateProfileUpdate };
+module.exports = { validateSignUp, validateProfileUpdate , validateLogin };
