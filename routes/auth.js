@@ -8,6 +8,10 @@ authRouter.post("/signup", async (req, res) => {
   try {
     validateSignUp(req);
     const { emailId, password } = req.body;
+    const checkUser = await User.find({emailId : emailId});
+    if(checkUser?.length > 0){
+      throw new Error("User already Exist")
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
       emailId: emailId,
